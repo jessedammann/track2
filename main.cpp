@@ -5,6 +5,30 @@
 
 using namespace std;
 
+
+int mainMenu() {
+    
+    int answer = 0;
+    cout << " Select an option:" << endl;
+    cout << endl;
+    cout << "1. Display the values in ascending order"<< endl;
+    cout << "2. Display the smallest value entered"<< endl;
+    cout << "3. Display the largest value entered"<< endl;
+    cout << "4. Display the range of the values entered"<< endl;
+    cout << "6. Display the mean (average value)"<< endl;
+    cout << "7. Display the median value"<< endl;
+    cout << "8. Display the sample standard deviation"<< endl;
+    cout << "9. Exit"<< endl;
+
+
+    cout << endl;
+    cout << "Type in which one you'd like here: ";
+    cin >> answer;
+    cout << endl;
+    
+    return(answer);
+}
+
 int sumOfNums(int input[], int size){
     
     //cout << size << endl;
@@ -46,17 +70,21 @@ int sdOfNums(int input[], int size){
 }
 
 
+//*********************************************** START HERE ***********************************************//
+
 
 int main()
 {
 int sizeMax = 10;
 int input[sizeMax];
 int size = 0;
-
-cout << "Enter a series of up to 10 positive numbers. Terminate the list with a -1." << endl;
-
-cin;
+   
+// prompt the user what they would like to do (this menu can be seen after or before prompting the user to input thier numbers
+mainMenu();
     
+cout << "Enter a series of up to 10 positive numbers. Terminate the list with a -1." << endl;
+cin;
+
 for(int j = 0; j < sizeMax; ++j){
     input[j] = -1;
 }
@@ -71,30 +99,13 @@ for( int j = 0; j < sizeMax; ++j ){
     }
     input[ j ] = tmp;
 }
-    
 
     sumOfNums(input, size);
     meanOfNums(input, size);
-    sdOfNums(input, size)
-    /*int input[] = {5,5,5,5,5,5,5,5,5,5};
-    double size = sizeof(input);
-    cout << size << endl;
-    //sum function
-    double sum =0;
-    for (int j = 0; j < size; j++ ){
-        sum = sum + input[j];
-    }
-    cout << sum;
-    
-    // mean function
-    double mean;
-    mean = sum / size;
-    
-    cout << mean;*/
-    
+
+
 return 0;
 }
-
 //Enter a series of up to 10 positive numbers. Terminate the list with a -1.
 //1. ascending order
 //2. smallest value entered
