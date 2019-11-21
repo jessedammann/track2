@@ -163,15 +163,6 @@ int main()
     // primpt the user to type in a set of numbers. Terminate the list with a -1 
 	getInput(input, size, sizeMax);                      //get input 
 	ascendingSort(input, size);                          //sort (After these lines, numbers in input[] are in ascending order )
-	
-//////TEST OUTPUT (please erase before submission)/////////////////////////////													 
-	cout << "checking sort result: ";
-	for(int i = 0; i < size; i++)
-	{
-		cout << input[i] << " ";
-	} 
-	cout <<"\n\n\n" << endl;	
-//////////////////////////////////////////////////////////////////////////////
    
 	// prompt the user what they would like to do (this menu can be seen after or before prompting the user to input thier numbers
 	userAnswer = mainMenu();
