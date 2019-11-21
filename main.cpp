@@ -1,3 +1,9 @@
+/**********************************************************************************************************************
+In-Class Group Project TRACK 2
+Name: Laura Yang, Jesse Dammann, Jesse and Shigeki Kamata
+Date: 11/20/2019
+***********************************************************************************************************************/
+
 #include<iostream>
 #include<string>
 #include<fstream>
@@ -15,6 +21,7 @@ int mainMenu() {
     cout << "2. Display the smallest value entered"<< endl;
     cout << "3. Display the largest value entered"<< endl;
     cout << "4. Display the range of the values entered"<< endl;
+    cout << "5. Display the sum of the values entered" << endl;
     cout << "6. Display the mean (average value)"<< endl;
     cout << "7. Display the median value"<< endl;
     cout << "8. Display the sample standard deviation"<< endl;
