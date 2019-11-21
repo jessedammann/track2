@@ -38,7 +38,7 @@ int mainMenu() {
     return(answer);
 }
 
-int sumOfNums(double input[], int size){
+double sumOfNums(double input[], int size){
     
     //cout << size << endl;
     //sum function
