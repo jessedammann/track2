@@ -38,7 +38,7 @@ int mainMenu() {
     return(answer);
 }
 
-int sumOfNums(int input[], int size){
+int sumOfNums(double input[], int size){
     
     //cout << size << endl;
     //sum function
@@ -52,7 +52,7 @@ int sumOfNums(int input[], int size){
 }
 
 
-int meanOfNums(int input[], int size){
+double meanOfNums(double input[], int size){
     double mean;
     double sum = 0;
     for (int j = 0; j < size; j++ ){
@@ -65,7 +65,7 @@ int meanOfNums(int input[], int size){
     return(mean);
 }
 
-int sdOfNums(int input[], int size){
+double sdOfNums(double input[], int size){
     double mean;
     double sum = 0;
     for (int j = 0; j < size; j++ ){
@@ -80,7 +80,7 @@ int sdOfNums(int input[], int size){
 
 
 //This function gets input from user and reflect it to input[] and size in main()
-void getInput(int input[], int &size, int sizeMax)
+void getInput(double input[], int &size, int sizeMax)
 {
 	cout << "Enter a series of up to 10 positive numbers. Terminate the list with a -1." << endl;
 	cin;
@@ -94,7 +94,7 @@ void getInput(int input[], int &size, int sizeMax)
 	//take in input
 	for( int i = 0; i < sizeMax; ++i) 
 	{
-    	int tmp = 0;
+    	double tmp = 0;
     	cin >> tmp;
     	if( tmp == -1 ) {   // if the input is equal to -1, then record size and terminate the loop
     		size = i;
@@ -117,7 +117,7 @@ void getInput(int input[], int &size, int sizeMax)
 
 
 // This function sort a given array. The result is reflecrted in main() 
-void ascendingSort(int input[], int size)
+void ascendingSort(double input[], int size)
 {
 	int result[size];	
 	for (int i = 0; i < size; i++)
@@ -126,7 +126,7 @@ void ascendingSort(int input[], int size)
 		{
 			if(input[i] > input[j])
 			{
-				int temp;
+				double temp;
 				temp = input[i];
 				input[i] = input[j];
 				input[j] = temp;
@@ -136,7 +136,7 @@ void ascendingSort(int input[], int size)
  }
  
  // returns median (NOTE: works only when the array is sorted)
-double median(int input[], int size)
+double median(double input[], int size)
 {
 	if (size % 2 != 0)
 	{
@@ -156,8 +156,9 @@ double median(int input[], int size)
 int main()
 {
 	int sizeMax = 10;
-	int input[sizeMax];
+	double input[sizeMax];
 	int size = 0;
+	int userAnswer;
 
     // primpt the user to type in a set of numbers. Terminate the list with a -1 
 	getInput(input, size, sizeMax);                      //get input 
@@ -173,28 +174,57 @@ int main()
 //////////////////////////////////////////////////////////////////////////////
    
 	// prompt the user what they would like to do (this menu can be seen after or before prompting the user to input thier numbers
-	mainMenu();
+	userAnswer = mainMenu();
     
-	//Q1.
-	cout << "1. ascending order: ";
-	for (int i = 0; i < size; i++)
+    switch(userAnswer) 
 	{
-		cout << input[i] << " ";
+  		case 1:
+    		cout << "1. Display the values in ascending order\n\n";
+    		cout << "Answer: ";
+			for (int i = 0; i < size; i++)
+			{
+				cout << input[i] << " ";
+			}
+			cout << endl;
+			
+    		break;
+  		
+		case 2:
+			cout << "2. Display the smallest value entered\n\n";
+    		cout << "Answer: " << input[0] << endl;	
+    		break;
+    	case 3:
+    		cout << "3. Display the largest value entered\n\n";
+    		cout << "Answer: "  << input[size -1] << endl;
+			break;
+    	case 4:
+    		cout << "4. Display the range of the values entered\n\n";
+    		cout << "Answer: " << input[size - 1] - input[0] << endl;
+			break;
+    	case 5:
+    		cout << "5. Display the sum of the values entered\n\n";
+    		cout << "Answer: " << sumOfNums(input, size) << endl;
+			break;
+    	case 6:
+    		cout << "6. Display the mean (average value)\n\n";
+    		cout << "Answer: " << meanOfNums(input, size) << endl;
+			break;
+    	case 7:
+    		cout << "7. Display the median value\n\n";
+    		cout << "Answer: " <<median(input, size) << endl;
+			break;
+    	case 8:
+    		cout << "8. Display the sample standard deviation\n\n";
+    		// Answer for Q8 comes here
+			break;
+  		default:
+    		cout << "default";
+    		// Action for 9 and other invalid numbers comes here
+    		break;
 	}
-	cout << endl;
-	
-	//Q2.
-	cout << "2. smallest value entered: " << input[0] << endl;	
-	//Q3.
-	cout << "3. largest value entered: "  << input[size -1] << endl;
-	//Q4.
-	cout << "4. range: " << input[size - 1] - input[0] << endl;
 
-    sumOfNums(input, size);
-    meanOfNums(input, size);
-
-	//Q7
-	cout << "7. median: " << median(input, size);
+    
+    
 
 
 return 0;
