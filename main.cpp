@@ -178,14 +178,14 @@ int main()
     
     switch(userAnswer) 
 	{
-  		case 1:
-    		cout << "1. Display the values in ascending order\n\n";
+  	    case 1:
+                cout << "1. Display the values in ascending order\n\n";
     		cout << "Answer: ";
-			for (int i = 0; i < size; i++)
-			{
-				cout << input[i] << " ";
-			}
-			cout << endl;
+		for (int i = 0; i < size; i++)
+		{
+			cout << input[i] << " ";
+		}
+		cout << endl;
 			
     		break;
   		
@@ -193,33 +193,36 @@ int main()
 			cout << "2. Display the smallest value entered\n\n";
     		cout << "Answer: " << input[0] << endl;	
     		break;
-    	case 3:
+    	    case 3:
     		cout << "3. Display the largest value entered\n\n";
     		cout << "Answer: "  << input[size -1] << endl;
-			break;
-    	case 4:
+		break;
+    	    case 4:
     		cout << "4. Display the range of the values entered\n\n";
     		cout << "Answer: " << input[size - 1] - input[0] << endl;
-			break;
-    	case 5:
+		break;
+    	    case 5:
     		cout << "5. Display the sum of the values entered\n\n";
     		cout << "Answer: " << sumOfNums(input, size) << endl;
-			break;
-    	case 6:
+		break;
+    	    case 6:
     		cout << "6. Display the mean (average value)\n\n";
     		cout << "Answer: " << meanOfNums(input, size) << endl;
-			break;
-    	case 7:
+		break;
+    	    case 7:
     		cout << "7. Display the median value\n\n";
     		cout << "Answer: " <<median(input, size) << endl;
-			break;
-    	case 8:
+		break;
+    	    case 8:
     		cout << "8. Display the sample standard deviation\n\n";
     		// Answer for Q8 comes here
-			break;
-  		default:
-    		cout << "default";
-    		// Action for 9 and other invalid numbers comes here
+		break;
+	    case 9:
+                cout << "Exiting" << endl;
+		break;
+  	    default:
+    		cout << "Invalid input";
+    		// Actions for invalid numbers come here
     		break;
 	}
 
