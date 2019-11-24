@@ -8,6 +8,7 @@ Date: 11/20/2019
 #include<string>
 #include<fstream>
 #include<iomanip>
+#include<cmath>
 
 using namespace std;
 
@@ -46,7 +47,6 @@ double sumOfNums(double input[], int size){
     for (int j = 0; j < size; j++ ){
         sum = sum + input[j];
     }
-    cout << sum;
     
     return(sum);
 }
@@ -60,7 +60,6 @@ double meanOfNums(double input[], int size){
     }
     
     mean = sum / size;
-    cout << mean;
     
     return(mean);
 }
@@ -68,155 +67,166 @@ double meanOfNums(double input[], int size){
 double sdOfNums(double input[], int size){
     double mean;
     double sum = 0;
+    double step1 = 0;
+    double sd = 0;
     for (int j = 0; j < size; j++ ){
         sum = sum + input[j];
     }
-    
     mean = sum / size;
-    cout << mean;
     
-    return(mean);
+    for (int j = 0; j < size; j++ ){
+            step1 = step1 + pow((input[j] - mean), 2);
+       }
+    sd = sqrt(step1/(size - 1));
+    
+    return(sd);
 }
 
 
 //This function gets input from user and reflect it to input[] and size in main()
 void getInput(double input[], int &size, int sizeMax)
 {
-	cout << "Enter a series of up to 10 positive numbers. Terminate the list with a -1." << endl;
-	cin;
-	
-	//Initiazize the array
-	for( int j = 0; j < sizeMax; ++j) 
-	{
-    	input[j] = -1;
-	}
-	
-	//take in input
-	for( int i = 0; i < sizeMax; ++i) 
-	{
-    	double tmp = 0;
-    	cin >> tmp;
-    	if( tmp == -1 ) {   // if the input is equal to -1, then record size and terminate the loop
-    		size = i;
-        	break;
-    	}
-       	input[ i ] = tmp;
-       	size = i;
-	}
-	
-	//echo input	
-	cout << "your input: ";
-	for( int i = 0; i < size; ++i) {
-    	cout << input[i] << " ";
-	}
-	cout << endl;
-	
-	//display the size
-	cout << size << " number(s) entered\n\n" << endl;
+    cout << "Enter a series of up to 10 positive numbers. Terminate the list with a -1." << endl;
+    cin;
+    
+    //Initiazize the array
+    for( int j = 0; j < sizeMax; ++j)
+    {
+        input[j] = -1;
+    }
+    
+    //take in input
+    for( int i = 0; i < sizeMax; ++i)
+    {
+        double tmp = 0;
+        cin >> tmp;
+        if( tmp == -1 ) {   // if the input is equal to -1, then record size and terminate the loop
+            size = i;
+            break;
+        }
+           input[ i ] = tmp;
+           size = i;
+    }
+    
+    //echo input
+    cout << "your input: ";
+    for( int i = 0; i < size; ++i) {
+        cout << input[i] << " ";
+    }
+    cout << endl;
+    
+    //display the size
+    cout << size << " number(s) entered\n\n" << endl;
 }
 
 
-// This function sort a given array. The result is reflecrted in main() 
+// This function sort a given array. The result is reflecrted in main()
 void ascendingSort(double input[], int size)
 {
-	int result[size];	
-	for (int i = 0; i < size; i++)
-	{
-		for( int j = i + 1; j < size; j++)
-		{
-			if(input[i] > input[j])
-			{
-				double temp;
-				temp = input[i];
-				input[i] = input[j];
-				input[j] = temp;
-			}
-		}	
-	}
+    int result[size];
+    for (int i = 0; i < size; i++)
+    {
+        for( int j = i + 1; j < size; j++)
+        {
+            if(input[i] > input[j])
+            {
+                double temp;
+                temp = input[i];
+                input[i] = input[j];
+                input[j] = temp;
+            }
+        }
+    }
  }
  
  // returns median (NOTE: works only when the array is sorted)
 double median(double input[], int size)
 {
-	if (size % 2 != 0)
-	{
-		return 	input[size/2];
-	}
-	else
-	{
-		double mean = 0;
-		mean = (input[size/2 - 1] + input[size/2]) / 2.0;
-		return mean;
-	}
-} 
+    if (size % 2 != 0)
+    {
+        return     input[size/2];
+    }
+    else
+    {
+        double mean = 0;
+        mean = (input[size/2 - 1] + input[size/2]) / 2.0;
+        return mean;
+    }
+}
+
 
 //*********************************************** START HERE ***********************************************//
 
 
 int main()
 {
-	int sizeMax = 10;
-	double input[sizeMax];
-	int size = 0;
-	int userAnswer;
+    int sizeMax = 10;
+    double input[sizeMax];
+    int size = 0;
+    int userAnswer;
 
-    // primpt the user to type in a set of numbers. Terminate the list with a -1 
-	getInput(input, size, sizeMax);                      //get input 
-	ascendingSort(input, size);                          //sort (After these lines, numbers in input[] are in ascending order )
-   
-	// prompt the user what they would like to do (this menu can be seen after or before prompting the user to input thier numbers
-	userAnswer = mainMenu();
+       
     
-    switch(userAnswer) 
-	{
-  	    case 1:
-                cout << "1. Display the values in ascending order\n\n";
-    		cout << "Answer: ";
-		for (int i = 0; i < size; i++)
-		{
-			cout << input[i] << " ";
-		}
-		cout << endl;
-			
-    		break;
-  		
-		case 2:
-			cout << "2. Display the smallest value entered\n\n";
-    		cout << "Answer: " << input[0] << endl;	
-    		break;
-    	    case 3:
-    		cout << "3. Display the largest value entered\n\n";
-    		cout << "Answer: "  << input[size -1] << endl;
-		break;
-    	    case 4:
-    		cout << "4. Display the range of the values entered\n\n";
-    		cout << "Answer: " << input[size - 1] - input[0] << endl;
-		break;
-    	    case 5:
-    		cout << "5. Display the sum of the values entered\n\n";
-    		cout << "Answer: " << sumOfNums(input, size) << endl;
-		break;
-    	    case 6:
-    		cout << "6. Display the mean (average value)\n\n";
-    		cout << "Answer: " << meanOfNums(input, size) << endl;
-		break;
-    	    case 7:
-    		cout << "7. Display the median value\n\n";
-    		cout << "Answer: " <<median(input, size) << endl;
-		break;
-    	    case 8:
-    		cout << "8. Display the sample standard deviation\n\n";
-    		// Answer for Q8 comes here
-		break;
-	    case 9:
-                cout << "Exiting" << endl;
-		break;
-  	    default:
-    		cout << "Invalid input";
-    		// Actions for invalid numbers come here
-    		break;
-	}
-
+    while (userAnswer != 9) {
+            cout << endl;
+            cout << endl;
+        // primpt the user to type in a set of numbers. Terminate the list with a -1
+             getInput(input, size, sizeMax);                      //get input
+             ascendingSort(input, size);                          //sort (After these lines, numbers in input[] are in ascending order )
+            
+             // prompt the user what they would like to do (this menu can be seen after or before prompting the user to input thier numbers
+             userAnswer = mainMenu();
+        
+        switch(userAnswer)
+        {
+              case 1:
+                    cout << "1. Display the values in ascending order\n\n";
+                cout << "Answer: ";
+            for (int i = 0; i < size; i++)
+            {
+                cout << input[i] << " ";
+            }
+            cout << endl;
+                
+                break;
+              
+            case 2:
+                cout << "2. Display the smallest value entered\n\n";
+                cout << "Answer: " << input[0] << endl;
+                break;
+                case 3:
+                cout << "3. Display the largest value entered\n\n";
+                cout << "Answer: "  << input[size -1] << endl;
+            break;
+                case 4:
+                cout << "4. Display the range of the values entered\n\n";
+                cout << "Answer: " << input[size - 1] - input[0] << endl;
+            break;
+                case 5:
+                cout << "5. Display the sum of the values entered\n\n";
+                cout << "Answer: " << sumOfNums(input, size) << endl;
+            break;
+                case 6:
+                cout << "6. Display the mean (average value)\n\n";
+                cout << "Answer: " << meanOfNums(input, size) << endl;
+            break;
+                case 7:
+                cout << "7. Display the median value\n\n";
+                cout << "Answer: " <<median(input, size) << endl;
+            break;
+                case 8:
+                cout << "8. Display the sample standard deviation\n\n";
+                 cout << "Answer: " <<sdOfNums(input, size) << endl;
+            break;
+            case 9:
+                    cout << "Exiting" << endl;
+            break;
+              default:
+                cout << "Invalid input";
+                // Actions for invalid numbers come here
+                break;
+        }
+    }
     
     
 
