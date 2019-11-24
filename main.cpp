@@ -35,14 +35,17 @@ int main()
     getInput(input, size, sizeMax);                      //get input
     ascendingSort(input, size);                          //sort (After these lines, numbers in input[] are in ascending order )
 	
-    cout << setprecision(2) << fixed;
-       
-    while (userAnswer != 9) {
-                         
-        // prompt the user what they would like to do (this menu can be seen after or before prompting the user to input thier numbers
-        userAnswer = mainMenu();
+    // prompt the user what they would like to do (this menu can be seen after or before prompting the user to input thier numbers
+    userAnswer = mainMenu();
+	
+    cout << setprecision(2) << fixed;	
+    
+    while (userAnswer != 9)
+    {
         //display the answer to the question of user's choice
         displayResult(userAnswer, input, size);
+    
+	userAnswer = mainMenu();
     }
 	
     cout << "GoodBye!";
