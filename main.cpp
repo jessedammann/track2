@@ -29,13 +29,13 @@ int main()
     int size = 0;
     int userAnswer;
 
-	cout << "CS161 Lab7 Track 2 – Menu driven calculator using functions." << endl;
+    cout << "CS161 Lab7 Track 2 – Menu driven calculator using functions." << endl;
 	
     // prompt the user to type in a set of numbers. Terminate the list with a -1
     getInput(input, size, sizeMax);                      //get input
     ascendingSort(input, size);                          //sort (After these lines, numbers in input[] are in ascending order )
 	
-	cout << setprecision(2) << fixed;
+    cout << setprecision(2) << fixed;
        
     while (userAnswer != 9) {
                          
@@ -43,9 +43,9 @@ int main()
         userAnswer = mainMenu();
         //display the answer to the question of user's choice
         displayResult(userAnswer, input, size);
-	}
+    }
 	
-	cout << "GoodBye!";
+    cout << "GoodBye!";
     
 return 0;
 }
@@ -105,7 +105,7 @@ double sdOfNums(double input[], int size){
     
     for (int j = 0; j < size; j++ ){
             step1 = step1 + pow((input[j] - mean), 2);
-       }
+    }
     sd = sqrt(step1/(size - 1));
     
     return(sd);
@@ -219,8 +219,8 @@ void displayResult(int userAnswer, double input[], int size)
             cout << "The sample standard deviation = ";
             cout << sdOfNums(input, size) << endl;
             break;
-		case 9:
-			break;
+	case 9:
+	    break;
         default:
             cout << "Invalid input. Please Enter a number 1 - 9.";
             break;
