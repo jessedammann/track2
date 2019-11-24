@@ -1,23 +1,63 @@
 /**********************************************************************************************************************
 In-Class Group Project TRACK 2
 Name: Laura Yang, Jesse Dammann and Shigeki Kamata
-Date: 11/20/2019
+Date: 11/24/2019
 ***********************************************************************************************************************/
 
 #include<iostream>
 #include<string>
-#include<fstream>
 #include<iomanip>
 #include<cmath>
 
 using namespace std;
 
+//*********************************************** Function Protopypes **************************************//
+int mainMenu();
+double sumOfNums(double input[], int size);
+double meanOfNums(double input[], int size);
+double sdOfNums(double input[], int size);
+void getInput(double input[], int &size, int sizeMax);
+void ascendingSort(double input[], int size);
+double median(double input[], int size);
+void displayResult(int userAnswer, double input[], int size);
+//*********************************************** START HERE ***********************************************//
+
+int main()
+{
+    int sizeMax = 10;
+    double input[sizeMax];
+    int size = 0;
+    int userAnswer;
+
+	cout << "CS161 Lab7 Track 2 – Menu driven calculator using functions." << endl;
+	
+    // prompt the user to type in a set of numbers. Terminate the list with a -1
+    getInput(input, size, sizeMax);                      //get input
+    ascendingSort(input, size);                          //sort (After these lines, numbers in input[] are in ascending order )
+	
+	cout << setprecision(2) << fixed;
+       
+    while (userAnswer != 9) {
+                         
+        // prompt the user what they would like to do (this menu can be seen after or before prompting the user to input thier numbers
+        userAnswer = mainMenu();
+        //display the answer to the question of user's choice
+        displayResult(userAnswer, input, size);
+	}
+	
+	cout << "GoodBye!";
+    
+return 0;
+}
+
+
+
+//***********************************************Difinitions of Function ***********************************************//
 
 int mainMenu() {
     int answer = 0;
 
     cout << " Select an option:" << endl;
-    cout << endl;
     cout << "1. Display the values in ascending order"<< endl;
     cout << "2. Display the smallest value entered"<< endl;
     cout << "3. Display the largest value entered"<< endl;
@@ -40,10 +80,8 @@ int mainMenu() {
 }
 
 double sumOfNums(double input[], int size){
-    
-    //cout << size << endl;
-    //sum function
     double sum = 0;
+
     for (int j = 0; j < size; j++ ){
         sum = sum + input[j];
     }
@@ -54,25 +92,16 @@ double sumOfNums(double input[], int size){
 
 double meanOfNums(double input[], int size){
     double mean;
-    double sum = 0;
-    for (int j = 0; j < size; j++ ){
-        sum = sum + input[j];
-    }
-    
-    mean = sum / size;
-    
+    mean = sumOfNums(input, size) / size;
     return(mean);
 }
 
 double sdOfNums(double input[], int size){
     double mean;
-    double sum = 0;
     double step1 = 0;
     double sd = 0;
-    for (int j = 0; j < size; j++ ){
-        sum = sum + input[j];
-    }
-    mean = sum / size;
+
+    mean = meanOfNums(input, size);
     
     for (int j = 0; j < size; j++ ){
             step1 = step1 + pow((input[j] - mean), 2);
@@ -82,11 +111,10 @@ double sdOfNums(double input[], int size){
     return(sd);
 }
 
-
 //This function gets input from user and reflect it to input[] and size in main()
 void getInput(double input[], int &size, int sizeMax)
 {
-    cout << "Enter a series of up to 10 positive numbers. Terminate the list with a -1." << endl;
+    cout << "Enter a series of up to 10 positive numbers. \n Terminate the list with a -1." << endl;
     cin;
     
     //Initiazize the array
@@ -104,23 +132,13 @@ void getInput(double input[], int &size, int sizeMax)
             size = i;
             break;
         }
-           input[ i ] = tmp;
-           size = i;
+        input[ i ] = tmp;
+        size = i;
     }
-    
-    //echo input
-    cout << "your input: ";
-    for( int i = 0; i < size; ++i) {
-        cout << input[i] << " ";
-    }
-    cout << endl;
-    
-    //display the size
-    cout << size << " number(s) entered\n\n" << endl;
 }
 
 
-// This function sort a given array. The result is reflecrted in main()
+// This function sorts a given array. The result is reflecrted in main()
 void ascendingSort(double input[], int size)
 {
     int result[size];
@@ -154,92 +172,59 @@ double median(double input[], int size)
     }
 }
 
-
-//*********************************************** START HERE ***********************************************//
-
-
-int main()
+void displayResult(int userAnswer, double input[], int size)
 {
-    int sizeMax = 10;
-    double input[sizeMax];
-    int size = 0;
-    int userAnswer;
-
-       
-    
-    while (userAnswer != 9) {
-            cout << endl;
-            cout << endl;
-        // primpt the user to type in a set of numbers. Terminate the list with a -1
-             getInput(input, size, sizeMax);                      //get input
-             ascendingSort(input, size);                          //sort (After these lines, numbers in input[] are in ascending order )
+    switch(userAnswer)
+    {
+        case 1:
+            cout << "The values entered are: ";
             
-             // prompt the user what they would like to do (this menu can be seen after or before prompting the user to input thier numbers
-             userAnswer = mainMenu();
-        
-        switch(userAnswer)
-        {
-              case 1:
-                    cout << "1. Display the values in ascending order\n\n";
-                cout << "Answer: ";
-            for (int i = 0; i < size; i++)
+        	for (int i = 0; i < size; i++)
             {
-                cout << input[i] << " ";
+                cout << input[i];
+                if (i < (size - 1))
+                {
+                	cout << ", ";
+				}
             }
             cout << endl;
                 
-                break;
+            break;
               
-            case 2:
-                cout << "2. Display the smallest value entered\n\n";
-                cout << "Answer: " << input[0] << endl;
-                break;
-                case 3:
-                cout << "3. Display the largest value entered\n\n";
-                cout << "Answer: "  << input[size -1] << endl;
+        case 2:
+            cout << "The smallest value entered is ";
+            cout << input[0] << endl;
             break;
-                case 4:
-                cout << "4. Display the range of the values entered\n\n";
-                cout << "Answer: " << input[size - 1] - input[0] << endl;
+        case 3:
+            cout << "The largest value entered is ";
+            cout << input[size -1] << endl;
+        	break;
+        case 4:
+            cout << "The range of the values entered is ";
+            cout << input[size - 1] - input[0] << endl;
             break;
-                case 5:
-                cout << "5. Display the sum of the values entered\n\n";
-                cout << "Answer: " << sumOfNums(input, size) << endl;
+        case 5:
+            cout << "The sum = ";
+            cout << sumOfNums(input, size) << endl;
             break;
-                case 6:
-                cout << "6. Display the mean (average value)\n\n";
-                cout << "Answer: " << meanOfNums(input, size) << endl;
+        case 6:
+            cout << "The mean = ";
+            cout << meanOfNums(input, size) << endl;
             break;
-                case 7:
-                cout << "7. Display the median value\n\n";
-                cout << "Answer: " <<median(input, size) << endl;
+        case 7:
+            cout << "The median = ";
+            cout <<median(input, size) << endl;
             break;
-                case 8:
-                cout << "8. Display the sample standard deviation\n\n";
-                 cout << "Answer: " <<sdOfNums(input, size) << endl;
+        case 8:
+            cout << "The sample standard deviation = ";
+            cout << sdOfNums(input, size) << endl;
             break;
-            case 9:
-                    cout << "Exiting" << endl;
+		case 9:
+			break;
+        default:
+            cout << "Invalid input. Please Enter a number 1 - 9.";
             break;
-              default:
-                cout << "Invalid input";
-                // Actions for invalid numbers come here
-                break;
-        }
-    }
-    
-    
-
-
-return 0;
+	}
+	cout << endl;
 }
-//Enter a series of up to 10 positive numbers. Terminate the list with a -1.
-//1. ascending order
-//2. smallest value entered
-//3. largest value entered
-//4. range
-//5. sum of the value entered
-//6. the mean
-//7. median
-//8. standard deviation
-//9. exit
+
